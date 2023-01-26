@@ -1,16 +1,17 @@
+
+# Use the official golang image as the base image
 FROM golang:latest
 
-ENV GOPATH /go
-ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+# Set the working directory in the container
+WORKDIR /app
 
-RUN mkdir -p $GOPATH/src/myapp
-WORKDIR $GOPATH/src/myapp
-
+# Copy the source code into the container
 COPY . .
 
-RUN go mod download
-RUN go build -o myapp
 
-EXPOSE 8080
+# Build the Go application
+RUN go build -o main .
+EXPOSE 80
 
-CMD ["/go/src/myapp/myapp"]
+# Run the binary when the container starts
+CMD ["./main"]
