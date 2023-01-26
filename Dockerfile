@@ -1,12 +1,16 @@
-#dockerfile
 FROM golang:latest
 
-COPY src /src/myapp
-RUN go mod init
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
-RUN cd /src/myapp && \
-    go build -o myapp
+RUN mkdir -p $GOPATH/src/myapp
+WORKDIR $GOPATH/src/myapp
 
-EXPOSE 80
+COPY . .
 
-CMD ["./myapp"]
+RUN go mod download
+RUN go build -o myapp
+
+EXPOSE 8080
+
+CMD ["/src/myapp/myapp"]
