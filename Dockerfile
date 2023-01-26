@@ -1,16 +1,16 @@
 FROM golang:latest
 
-ENV GOPATH 
-ENV PATH $GOPATH/bin:/usr/local/bin:$PATH
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
-RUN mkdir -p $GOPATH/src
-WORKDIR $GOPATH/src
+RUN mkdir -p $GOPATH/src/myapp
+WORKDIR $GOPATH/src/myapp
 
 COPY . .
 
 RUN go mod download
-RUN go build -o main.go
+RUN go build -o myapp
 
-EXPOSE 80
+EXPOSE 8080
 
-CMD ["/src/myapp"]
+CMD ["/go/src/myapp/myapp"]
