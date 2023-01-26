@@ -1,18 +1,10 @@
-# Use the official Go image as the base image
-FROM golang:1.16
+FROM golang:latest
 
-# Set the working directory for the container
-WORKDIR /app
+COPY src /src/myapp
 
-# Copy the application's source code into the container
-COPY src .
+RUN cd /src/myapp && \
+    go build -o myapp
 
-# Build the application inside the container
-RUN go build -o myapp
-
-# Expose the port that the application will listen on
 EXPOSE 80
 
-# Specify the command to run when the container starts
 CMD ["./myapp"]
-
