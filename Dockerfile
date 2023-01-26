@@ -1,3 +1,4 @@
+#dockerfile
 FROM golang:latest
 
 COPY src /src/myapp
