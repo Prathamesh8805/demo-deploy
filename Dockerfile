@@ -11,7 +11,7 @@ COPY . .
 
 # Build the Go application
 RUN go build -o main .
-EXPOSE 80
+EXPOSE 3000
 
 # Run the binary when the container starts
 CMD ["./main"]
