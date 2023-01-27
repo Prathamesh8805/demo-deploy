@@ -1,40 +1,36 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:171447642688:task-definition/demo-deploy:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-west-2:171447642688:task-definition/cb-app-task:3",
     "containerDefinitions": [
         {
-            "name": "demo-deploy",
-            "image": "171447642688.dkr.ecr.ap-south-1.amazonaws.com/demo-deploy",
-            "cpu": 0,
+            "name": "cb-app",
+            "image": "bradfordhamilton/crystal_blockchain:latest",
+            "cpu": 1024,
+            "memory": 2048,
             "portMappings": [
                 {
-                    "name": "demo-deploy-80-tcp",
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp",
-                    "appProtocol": "http"
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
                 }
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/demo-deploy",
-                    "awslogs-region": "ap-south-1",
+                    "awslogs-group": "/ecs/cb-app",
+                    "awslogs-region": "us-west-2",
                     "awslogs-stream-prefix": "ecs"
                 }
             }
         }
     ],
-    "family": "demo-deploy",
-    "taskRoleArn": "arn:aws:iam::171447642688:role/myEcsTaskExecutionRole",
+    "family": "cb-app-task",
     "executionRoleArn": "arn:aws:iam::171447642688:role/myEcsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 3,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -45,25 +41,13 @@
             "name": "ecs.capability.execution-role-awslogs"
         },
         {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.task-iam-role"
-        },
-        {
-            "name": "ecs.capability.execution-role-ecr-pull"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
         },
         {
             "name": "ecs.capability.task-eni"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
         }
     ],
     "placementConstraints": [],
@@ -74,18 +58,9 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "256",
-    "memory": "512",
-    "runtimePlatform": {
-        "cpuArchitecture": "X86_64",
-        "operatingSystemFamily": "LINUX"
-    },
-    "registeredAt": "2023-01-25T09:25:33.569Z",
-    "registeredBy": "arn:aws:iam::171447642688:root",
-    "tags": [
-        {
-            "key": "ecs:taskDefinition:createdFrom",
-            "value": "ecs-console-v2"
-        }
-    ]
+    "cpu": "1024",
+    "memory": "2048",
+    "registeredAt": "2023-01-27T04:09:04.091Z",
+    "registeredBy": "arn:aws:iam::171447642688:user/terraform",
+    "tags": []
 }
